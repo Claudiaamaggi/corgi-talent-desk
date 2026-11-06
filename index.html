@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Corgi Talent Desk — post a role</title>
+<title>Corgi Talent Desk</title>
 <meta name="description" content="Share a job opening with the Corgi London community." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%95%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
@@ -17,19 +17,23 @@
 <header class="masthead">
   <div class="shell">
     <div class="brand">
-      <span class="brand-mark" aria-hidden="true">🐕</span>
-      <span class="brand-text">Corgi <span class="brand-sub">Talent Desk</span></span>
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">Corgi</span>
     </div>
-    <h1>Post a role to the Corgi community.</h1>
-    <p class="lede">
-      We share openings with the people who pass through Corgi London — the café regulars,
-      the event crowd, the builders. Tell us about the job and we&rsquo;ll get it in front of them.
-    </p>
-    <ul class="reassure">
-      <li>Free to post</li>
-      <li>Reviewed by a human</li>
-      <li>Usually live within 2 working days</li>
-    </ul>
+    <div class="hero">
+      <div class="hero-copy">
+        <h1>Corgi Talent Desk</h1>
+        <p class="hero-note">
+          Post a role below. We review every submission and we&rsquo;ll let you know if we
+          spotlight it in our newsletter.
+        </p>
+      </div>
+      <picture class="hero-art">
+        <source srcset="assets/corgi-hiring.webp" type="image/webp" />
+        <img src="assets/corgi-hiring.png" width="900" height="848"
+             alt="An illustrated corgi in a shirt and tie holding a cardboard sign reading HIRING" />
+      </picture>
+    </div>
   </div>
 </header>
 
@@ -169,10 +173,13 @@
   </form>
 
   <div id="done" class="card card-done" hidden>
-    <span class="done-mark" aria-hidden="true">🐕</span>
+    <picture>
+      <source srcset="assets/corgi-hiring.webp" type="image/webp" />
+      <img class="done-mark" src="assets/corgi-hiring.png" width="900" height="848" alt="" />
+    </picture>
     <h2>Got it — thank you.</h2>
     <p>Your role has landed with the Corgi London team. We&rsquo;ll review it and email you at
-      <strong id="done-email"></strong> if we need anything.</p>
+      <strong id="done-email"></strong> &mdash; including if we spotlight it in our newsletter.</p>
     <button id="again" class="btn btn-quiet" type="button">Post another role</button>
   </div>
 </main>

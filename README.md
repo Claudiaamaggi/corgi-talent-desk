@@ -8,7 +8,8 @@ No build step, no dependencies — it's three static files plus an Apps Script b
 
 ```
 index.html          the page
-assets/styles.css   Corgi styling (light + dark)
+assets/styles.css   Corgi styling (light + dark), on the corgi.insure palette
+assets/corgi-hiring.{webp,png}  the hiring-corgi illustration
 assets/app.js       validation + submission
 config.js           ← paste your Apps Script URL here
 apps-script/Code.gs the backend: writes the row, sends the notification
