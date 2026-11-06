@@ -26,9 +26,15 @@ Do this signed in as **londoncafe@corgi.com**, so that account owns the Sheet.
    - `SEND_EMAIL_NOTIFICATIONS` — `true` sends an email per submission, `false` silences it.
    - `NOTIFY_TO` — currently `londoncafe@corgi.com`.
 
-   The file is annotated `@OnlyCurrentDoc` and never calls `openById`, which keeps
-   the Sheets authorisation scoped to this one bound Sheet rather than every
-   spreadsheet in the account. Adding an `openById` call would silently widen it.
+   The file is annotated `@OnlyCurrentDoc` and never opens a spreadsheet by id or
+   url, which keeps the Sheets authorisation scoped to this one bound Sheet rather
+   than every spreadsheet in the account.
+
+   `apps-script/appsscript.json` then declares those scopes explicitly, so they are
+   pinned rather than inferred: if future code needs a wider scope it fails at
+   runtime instead of quietly asking the next authoriser for more. To install it,
+   turn on **Project Settings → Show "appsscript.json" manifest file in editor**
+   and replace that file's contents.
 4. Save, then **Run → `setup`** once. Approve the permission prompt (it needs to write to
    the Sheet and send mail as you). This creates the `Submissions` tab and its headers.
 5. **Deploy → New deployment → Web app**, with:
