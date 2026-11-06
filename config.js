@@ -5,5 +5,5 @@
  * See README.md → "Connect the Google Sheet".
  */
 window.CORGI_TALENT_DESK = {
-  ENDPOINT: "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE"
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbzyvX4VrEwtr-zxhbN8FFGci6eJmAwKDuokeGFDTY4y-3Csip9qJkHx9dGx9tIYujWyEA/exec"
 };
