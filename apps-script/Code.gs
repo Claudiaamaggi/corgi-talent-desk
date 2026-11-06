@@ -132,7 +132,7 @@ function sheet_() {
   if (sh.getLastRow() === 0) {
     sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
     sh.setFrozenRows(1);
-    sh.getRange(1, 1, 1, HEADERS.length).setBackground('#f7ede0');
+    sh.getRange(1, 1, 1, HEADERS.length).setBackground('#ffdecc');
   }
   return sh;
 }
