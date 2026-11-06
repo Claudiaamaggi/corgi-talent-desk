@@ -23,6 +23,10 @@
 }
 
 * { box-sizing: border-box; }
+
+/* An author `display` beats the UA stylesheet's [hidden] rule, so .banner's
+   display:flex kept the element visible even with the attribute set. */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 
 body {
