@@ -25,6 +25,10 @@ Do this signed in as **londoncafe@corgi.com**, so that account owns the Sheet.
 3. Check the CONFIG block at the top of the file:
    - `SEND_EMAIL_NOTIFICATIONS` — `true` sends an email per submission, `false` silences it.
    - `NOTIFY_TO` — currently `londoncafe@corgi.com`.
+
+   The file is annotated `@OnlyCurrentDoc` and never calls `openById`, which keeps
+   the Sheets authorisation scoped to this one bound Sheet rather than every
+   spreadsheet in the account. Adding an `openById` call would silently widen it.
 4. Save, then **Run → `setup`** once. Approve the permission prompt (it needs to write to
    the Sheet and send mail as you). This creates the `Submissions` tab and its headers.
 5. **Deploy → New deployment → Web app**, with:

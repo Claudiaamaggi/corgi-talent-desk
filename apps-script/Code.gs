@@ -3,6 +3,13 @@
  *
  * Deploy this from the londoncafe@corgi.com account so the Google Sheet
  * is owned by that account. Setup steps are in the repo README.
+ *
+ * @OnlyCurrentDoc
+ *
+ * That annotation, plus the absence of any open-by-ID call, holds the Sheets
+ * grant down to spreadsheets.currentonly — this one bound Sheet — instead of
+ * "all your spreadsheets". Do not reintroduce one without understanding
+ * that it widens the OAuth scope for the whole account.
  */
 
 // ─────────────────────────────────────────────────────────────
@@ -17,12 +24,6 @@ var NOTIFY_TO = 'londoncafe@corgi.com';
 
 /** Tab the submissions are written to. Created automatically if missing. */
 var SHEET_NAME = 'Submissions';
-
-/**
- * Leave empty when this script is bound to the Sheet (Extensions → Apps Script).
- * Otherwise paste the Sheet ID from its URL.
- */
-var SPREADSHEET_ID = '';
 
 // ─────────────────────────────────────────────────────────────
 
@@ -120,10 +121,8 @@ function parseBody(e) {
 }
 
 function sheet_() {
-  var ss = SPREADSHEET_ID
-    ? SpreadsheetApp.openById(SPREADSHEET_ID)
-    : SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) throw new Error('No spreadsheet — bind this script to a Sheet or set SPREADSHEET_ID.');
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error('No spreadsheet — this script must be bound to one (Extensions → Apps Script).');
 
   var sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) {
