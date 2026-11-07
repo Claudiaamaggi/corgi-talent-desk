@@ -21,8 +21,9 @@ var SEND_EMAIL_NOTIFICATIONS = true;
 
 /**
  * Where notifications go, by the Location chosen on the form.
- * A US role notifies all three; anything else (UK, or left blank) notifies
- * the London cafe only.
+ * A US role notifies all three; anything else notifies the London cafe only.
+ * Location is required, so a blank only reaches here via a crafted POST —
+ * which doPost rejects before this is consulted.
  */
 var NOTIFY_TO_UK = ['londoncafe@corgi.com'];
 var NOTIFY_TO_US = ['londoncafe@corgi.com', 'eggmily@corgi.com', 'erika@corgi.com'];
@@ -58,6 +59,7 @@ var REQUIRED = [
   'role_at_company',
   'job_title',
   'job_description',
+  'location',
   'application_url'
 ];
 

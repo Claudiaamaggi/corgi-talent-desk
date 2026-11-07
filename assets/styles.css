@@ -40,6 +40,7 @@ body {
 }
 
 .shell { width: 100%; max-width: 820px; margin: 0 auto; padding: 0 20px; }
+main.shell { padding-bottom: 64px; }   /* the footer used to provide this */
 
 .skip { position: absolute; left: -9999px; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 10px; z-index: 10; }
 .skip:focus { left: 16px; top: 16px; }
@@ -200,12 +201,6 @@ select { appearance: none; padding-right: 38px; }
 .card-done h2 { font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 10px; }
 .card-done p { color: var(--ink-soft); margin: 0 auto 24px; max-width: 48ch; }
 
-/* ---------- foot ---------- */
-
-.foot { padding: 34px 20px 60px; }
-.foot p { margin: 0; font-size: 13px; color: var(--ink-faint); }
-.foot a { color: var(--orange-deep); }
-
 @media (max-width: 680px) {
   .grid { grid-template-columns: 1fr; }
   .card { padding: 24px; }
@@ -245,6 +240,5 @@ select { appearance: none; padding-right: 38px; }
   .field.invalid input, .field.invalid textarea, .field.invalid select { background: #2a1519; }
   .btn-quiet { background: transparent; color: var(--ink); border-color: #3a3a3a; }
   .btn-quiet:hover { background: #242424; }
-  .foot a { color: var(--orange-mid); }
   input[type="date"] { color-scheme: dark; }
 }

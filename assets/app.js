@@ -42,6 +42,7 @@
     company: { label: "your company name" },
     role_at_company: { label: "your role" },
     job_title: { label: "the job title" },
+    location: { label: "a location" },
     job_description: {
       label: "a job description",
       test: function (v) { return v.length <= 2000; },

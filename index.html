@@ -111,18 +111,19 @@
         </div>
 
         <div class="field">
-          <label for="location">Location</label>
+          <label for="location">Location <span class="req" aria-hidden="true">*</span></label>
           <div class="select-wrap">
-            <select id="location" name="location">
+            <select id="location" name="location" required>
               <option value="">Select&hellip;</option>
               <option>UK</option>
               <option>US</option>
             </select>
           </div>
+          <p class="error" data-error-for="location"></p>
         </div>
 
         <div class="field">
-          <label for="city">City <span class="opt">optional</span></label>
+          <label for="city">City</label>
           <input id="city" name="city" type="text" maxlength="140" placeholder="e.g. London" />
         </div>
 
@@ -198,9 +199,6 @@
   </div>
 </main>
 
-<footer class="shell foot">
-  <p>Corgi London · 74 Great Eastern Street · Questions? <a href="mailto:londoncafe@corgi.com">londoncafe@corgi.com</a></p>
-</footer>
 
 <script src="config.js"></script>
 <script src="assets/app.js"></script>
