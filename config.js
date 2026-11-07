@@ -5,5 +5,5 @@
  * See README.md → "Connect the Google Sheet".
  */
 window.CORGI_TALENT_DESK = {
-  ENDPOINT: "https://script.google.com/macros/s/AKfycbzyvX4VrEwtr-zxhbN8FFGci6eJmAwKDuokeGFDTY4y-3Csip9qJkHx9dGx9tIYujWyEA/exec"
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbySh2nZiRw1UWAzHxZ2ITIutqBcOIXX-ynFHe7ODWtG5mmcVP5-CKi2NCJVG2VPpLkgWw/exec"
 };
