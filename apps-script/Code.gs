@@ -16,11 +16,16 @@
 //  CONFIG
 // ─────────────────────────────────────────────────────────────
 
-/** Email a notification to NOTIFY_TO on every new submission. Flip to false to silence. */
+/** Email a notification on every new submission. Flip to false to silence. */
 var SEND_EMAIL_NOTIFICATIONS = true;
 
-/** Where notifications go. */
-var NOTIFY_TO = 'londoncafe@corgi.com';
+/**
+ * Where notifications go, by the Location chosen on the form.
+ * A US role notifies all three; anything else (UK, or left blank) notifies
+ * the London cafe only.
+ */
+var NOTIFY_TO_UK = ['londoncafe@corgi.com'];
+var NOTIFY_TO_US = ['londoncafe@corgi.com', 'eggmily@corgi.com', 'erika@corgi.com'];
 
 /** Tab the submissions are written to. Created automatically if missing. */
 var SHEET_NAME = 'Submissions';
@@ -36,6 +41,7 @@ var HEADERS = [
   'Job title',
   'Job description',
   'Location',
+  'City',
   'Work type',
   'Employment type',
   'Salary range',
@@ -60,7 +66,9 @@ function doGet() {
   return json({
     ok: true,
     service: 'corgi-talent-desk',
-    notifications: SEND_EMAIL_NOTIFICATIONS ? NOTIFY_TO : 'off'
+    notifications: SEND_EMAIL_NOTIFICATIONS
+      ? { UK: NOTIFY_TO_UK.join(','), US: NOTIFY_TO_US.join(',') }
+      : 'off'
   });
 }
 
@@ -150,6 +158,7 @@ function appendRow_(data, submittedAt) {
       str(data.job_title),
       str(data.job_description),
       str(data.location),
+      str(data.city),
       str(data.work_type),
       str(data.employment_type),
       str(data.salary_range),
@@ -164,7 +173,13 @@ function appendRow_(data, submittedAt) {
   }
 }
 
+/** US roles go to the wider list; UK and unset go to London only. */
+function recipients_(location) {
+  return str(location).toUpperCase() === 'US' ? NOTIFY_TO_US : NOTIFY_TO_UK;
+}
+
 function notify_(data, submittedAt, row) {
+  var to = recipients_(data.location);
   var subject = 'New job post: ' + str(data.job_title) + ' at ' + str(data.company);
 
   var lines = [
@@ -174,6 +189,7 @@ function notify_(data, submittedAt, row) {
     '  Title:            ' + str(data.job_title),
     '  Company:          ' + str(data.company),
     '  Location:         ' + or_(data.location, '—'),
+    '  City:             ' + or_(data.city, '—'),
     '  Work type:        ' + or_(data.work_type, '—'),
     '  Employment type:  ' + or_(data.employment_type, '—'),
     '  Salary range:     ' + or_(data.salary_range, '—'),
@@ -195,7 +211,7 @@ function notify_(data, submittedAt, row) {
   ];
 
   MailApp.sendEmail({
-    to: NOTIFY_TO,
+    to: to.join(','),
     replyTo: str(data.email),
     subject: subject,
     body: lines.join('\n')
@@ -231,5 +247,10 @@ function or_(v, fallback) {
 /** Run once from the editor to create the tab and headers up front. Optional. */
 function setup() {
   sheet_();
-  console.log('Sheet ready. Notifications: ' + (SEND_EMAIL_NOTIFICATIONS ? NOTIFY_TO : 'off'));
+  if (!SEND_EMAIL_NOTIFICATIONS) {
+    console.log('Sheet ready. Notifications: off');
+    return;
+  }
+  console.log('Sheet ready. UK notifies ' + NOTIFY_TO_UK.join(', '));
+  console.log('              US notifies ' + NOTIFY_TO_US.join(', '));
 }

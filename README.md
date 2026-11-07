@@ -24,7 +24,7 @@ Do this signed in as **londoncafe@corgi.com**, so that account owns the Sheet.
    `apps-script/Code.gs`.
 3. Check the CONFIG block at the top of the file:
    - `SEND_EMAIL_NOTIFICATIONS` — `true` sends an email per submission, `false` silences it.
-   - `NOTIFY_TO` — currently `londoncafe@corgi.com`.
+   - `NOTIFY_TO_UK` / `NOTIFY_TO_US` — who gets notified, per location.
 
    The file is annotated `@OnlyCurrentDoc` and never opens a spreadsheet by id or
    url, which keeps the Sheets authorisation scoped to this one bound Sheet rather
@@ -61,8 +61,13 @@ The toggle is the first setting in `apps-script/Code.gs`:
 
 ```js
 var SEND_EMAIL_NOTIFICATIONS = true;
-var NOTIFY_TO = 'londoncafe@corgi.com';
+var NOTIFY_TO_UK = ['londoncafe@corgi.com'];
+var NOTIFY_TO_US = ['londoncafe@corgi.com', 'eggmily@corgi.com', 'erika@corgi.com'];
 ```
+
+Recipients follow the Location chosen on the form: a **US** role notifies all three
+addresses, while **UK** — or a submission that left Location blank — notifies the London
+cafe only.
 
 Each notification carries the full submission, with the submitter's address as `Reply-To`,
 so replying goes straight back to them. A notification that fails is logged but never
@@ -75,9 +80,10 @@ not a practical limit here, but worth knowing.
 
 **About you** — full name\*, email\*, company\*, role at company\*
 
-**The job** — job title\*, job description\* (2,000 chars, with a live counter), location,
-work type (On-site / Hybrid / Remote), employment type (Full-time / Part-time / Contract /
-Internship), salary range, application link\* (must be a valid URL), application deadline
+**The job** — job title\*, job description\* (2,000 chars, with a live counter), location
+(UK / US), city, work type (On-site / Hybrid / Remote), employment type (Full-time /
+Part-time / Contract / Internship), salary range, application link\* (must be a valid URL),
+application deadline
 
 **Consent\*** — "I confirm this role is real and I'm happy for Corgi to share it."
 

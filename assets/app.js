@@ -116,6 +116,7 @@
       job_title: get("job_title"),
       job_description: get("job_description"),
       location: get("location"),
+      city: get("city"),
       work_type: get("work_type"),
       employment_type: get("employment_type"),
       salary_range: get("salary_range"),
